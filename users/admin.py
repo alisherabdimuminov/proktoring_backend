@@ -16,12 +16,12 @@ class UserModelAdmin(UserAdmin):
 
     add_fieldsets = (
         ("Xodim qo'shish", {
-            "fields": ("username", "password1", "password2", "first_name", "last_name", "middle_name", "phone", "branch", "department", "position", "role", "pwd")
+            "fields": ("username", "password1", "password2", "first_name", "last_name", "middle_name", "role", "pwd")
         }),
     )
     fieldsets = (
         ("Xodimni tahrirlash", {
-            "fields": ("username", "first_name", "last_name", "middle_name", "phone", "branch", "department", "position", "role", "pwd")
+            "fields": ("username", "first_name", "last_name", "middle_name", "role", "pwd")
         }),
     )
 
