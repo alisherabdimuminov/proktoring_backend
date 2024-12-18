@@ -25,10 +25,6 @@ def add_user(request: HttpRequest):
     first_name = request.data.get("first_name")
     last_name = request.data.get("last_name")
     middle_name = request.data.get("middle_name")
-    phone = request.data.get("phone")
-    branch = request.data.get("branch")
-    department = request.data.get("department")
-    position = request.data.get("position")
     password = request.data.get("password")
     try:
         user = User.objects.create(
@@ -36,10 +32,6 @@ def add_user(request: HttpRequest):
             first_name=first_name,
             last_name=last_name,
             middle_name=middle_name,
-            branch=branch,
-            department=department,
-            position=position,
-            phone=phone,
             pwd=password,
             role="user"
         )
