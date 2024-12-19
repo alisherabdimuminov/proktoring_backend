@@ -1,6 +1,7 @@
 import random
 from datetime import datetime, timezone
 from fpdf import FPDF
+from decimal import Decimal
 
 from django.http import HttpRequest, HttpResponse
 from rest_framework import generics
@@ -424,13 +425,15 @@ def post_fine(request: HttpRequest):
     type = request.data.get("type")
     test_obj = Test.objects.get(uuid=test_uuid)
     if (type == "left"):
-        test_obj.left = test_obj.left + 1
+        test_obj.attention = test_obj.attention + Decimal(0.1)
     elif (type == "right"):
-        test_obj.right = test_obj.right + 1
+        test_obj.attention = test_obj.attention + Decimal(0.1)
     elif (type == "no_person"):
-        test_obj.no_person = test_obj.no_person + 1
+        test_obj.no_person = test_obj.no_person + Decimal(0.1)
     elif (type == "two_person"):
-        test_obj.two_person = test_obj.two_person + 1
+        test_obj.two_person = test_obj.two_person + Decimal(0.1)
+    
+    test_obj.fine = test_obj.attention + test_obj.on_blur + 1*test_obj.no_person + 2*test_obj.two_person
     test_obj.save()
     return Response({
         "status": "success",
@@ -442,11 +445,13 @@ def post_fine(request: HttpRequest):
 def on_blur(request: HttpRequest):
     test_uuid = request.data.get("test")
     test_obj = Test.objects.get(uuid=test_uuid)
-    test_obj.status = "ended"
-    test_obj.percentage = 0
+    test_obj.on_blur += 1
+    test_obj.fine = test_obj.attention + test_obj.on_blur + 1*test_obj.no_person + 2*test_obj.two_person
     test_obj.save()
     return Response({
         "status": "success",
         "code": "200",
-        "data": None
+        "data": {
+            "on_blur": test_obj.on_blur
+        }
     })

@@ -48,7 +48,7 @@ class TestsModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Test
-        fields = ("uuid", "name", "user", "set", "passed_score", "status", "percentage", "elapsed", "questions_count", "left", "right", "two_person", "no_person", )
+        fields = ("uuid", "name", "user", "set", "passed_score", "status", "percentage", "elapsed", "questions_count", "attention", "two_person", "no_person", "on_blur", "fine", )
 
 
 class CreateTestModelSerializer(serializers.ModelSerializer):

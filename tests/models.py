@@ -59,10 +59,11 @@ class Test(models.Model):
     elapsed = models.IntegerField(default=0, null=True, blank=True)
     cases = models.JSONField(default=json, null=True, blank=True)
     
-    right = models.IntegerField(default=0, null=True, blank=True)
-    left = models.IntegerField(default=0, null=True, blank=True)
-    two_person = models.IntegerField(default=0, null=True, blank=True)
-    no_person = models.IntegerField(default=0, null=True, blank=True)
+    attention = models.DecimalField(max_digits=10, decimal_places=2, default=0, null=True, blank=True)
+    on_blur = models.IntegerField(default=0)
+    two_person = models.DecimalField(max_digits=10, decimal_places=2, default=0, null=True, blank=True)
+    no_person = models.DecimalField(max_digits=10, decimal_places=2, default=0, null=True, blank=True)
+    fine = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
